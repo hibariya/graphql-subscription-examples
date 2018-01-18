@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_USER: ${USER:-app}
+        APP_UID: ${UID:-1000}
+    command: ['bin/rails', 'server', '-b', '0.0.0.0', '-p', '3000']
+    ports: ['3000:3000']
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: postgres
+      RAILS_LOG_TO_STDOUT: 'true'
+    volumes:
+      - .:/app
+      - bundle:/data/bundle
+    depends_on:
+      - postgres
+
+  webpacker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_USER: ${USER:-app}
+        APP_UID: ${UID:-1000}
+    command: ['bin/webpack-dev-server']
+    ports: ['3035:3035']
+    volumes:
+      - .:/app
+      - bundle:/data/bundle
+
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
+volumes:
+  db:
+  bundle:
+  redis:
