@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+ActiveRecord::Base.transaction do
+  alice = User.create! name: 'Alice'
+
+  12.times do |t|
+    Message.create! body: "Message #{t}", user: alice
+  end
+end
