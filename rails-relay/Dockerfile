@@ -2,7 +2,7 @@ FROM ruby:2.5-alpine
 
 RUN apk update --no-cache && apk upgrade --no-cache && apk add --no-cache --update tzdata tini build-base libc6-compat sqlite sqlite-dev nodejs nodejs-npm
 RUN npm install --global yarn # to use the latest version...
-RUN gem install bundler --pre --no-document
+RUN gem install bundler foreman --pre --no-document
 
 ARG APP_USER=app
 ARG APP_UID=1000
