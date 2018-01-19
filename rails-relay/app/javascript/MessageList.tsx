@@ -27,7 +27,7 @@ class MessageList extends Component<MessageListProps, {}> {
 export default createFragmentContainer(MessageList, {
   viewer: graphql`
     fragment MessageList_viewer on User {
-      messages(first: 10) {
+      messages(first: 10) @connection(key: "App_messages") {
         edges {
           node {
             id

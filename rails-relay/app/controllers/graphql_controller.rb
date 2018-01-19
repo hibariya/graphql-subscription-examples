@@ -1,19 +1,28 @@
 class GraphqlController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  before_action :require_user
+
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
     result = RailsRelaySchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   end
 
   private
+
+  attr_reader :current_user
+
+  def require_user
+    # TODO: find it with an identifier from the request
+    @current_user = User.last
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)

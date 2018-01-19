@@ -7,9 +7,11 @@ interface MessageItemProps {
 
 class MessageItem extends Component<MessageItemProps, {}> {
   render() {
+    const { message } = this.props;
+
     return (
       <div>
-        {this.props.message.body} {this.props.message.createdAt}
+        {message.createdAt} {message.user.name}: {message.body}
       </div>
     );
   }
@@ -21,6 +23,7 @@ export default createFragmentContainer(MessageItem, {
       id
       body
       user { name }
+      createdAt
     }
   `,
 });

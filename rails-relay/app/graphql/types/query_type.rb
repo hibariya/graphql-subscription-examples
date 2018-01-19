@@ -9,8 +9,7 @@ Types::QueryType = GraphQL::ObjectType.define do
   field :viewer, Types::UserType do
     description 'Represents the logged-in user (This may be redundant for Relay Modern)'
     resolve -> (_, _, ctx) {
-      # TODO: find it with an identifier from the request
-      User.last
+      ctx[:current_user]
     }
   end
 end

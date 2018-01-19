@@ -23,22 +23,26 @@ export type MessageList_viewer = {|
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": null,
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "messages"
+        ]
+      }
+    ]
+  },
   "name": "MessageList_viewer",
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": null,
-      "args": [
-        {
-          "kind": "Literal",
-          "name": "first",
-          "value": 10,
-          "type": "Int"
-        }
-      ],
+      "alias": "messages",
+      "args": null,
       "concreteType": "MessageConnection",
-      "name": "messages",
+      "name": "__App_messages_connection",
       "plural": false,
       "selections": [
         {
@@ -68,15 +72,54 @@ const fragment /*: ConcreteFragment*/ = {
                   "kind": "FragmentSpread",
                   "name": "MessageItem_message",
                   "args": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "__typename",
+                  "storageKey": null
                 }
               ],
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "cursor",
+              "storageKey": null
+            }
+          ],
+          "storageKey": null
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "name": "pageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "endCursor",
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "args": null,
+              "name": "hasNextPage",
               "storageKey": null
             }
           ],
           "storageKey": null
         }
       ],
-      "storageKey": "messages{\"first\":10}"
+      "storageKey": null
     }
   ],
   "type": "User"

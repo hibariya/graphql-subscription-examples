@@ -14,6 +14,7 @@ export type MessageItem_message = {|
   +user: {|
     +name: string;
   |};
+  +createdAt: string;
 |};
 */
 
@@ -54,6 +55,13 @@ const fragment /*: ConcreteFragment*/ = {
           "storageKey": null
         }
       ],
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "createdAt",
       "storageKey": null
     }
   ],

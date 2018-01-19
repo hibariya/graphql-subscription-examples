@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { createFragmentContainer, graphql } from 'react-relay';
 
+import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 
 interface AppMainProps {
   viewer: any;
+  relay?: any;
 }
 
 class AppMain extends Component<AppMainProps, {}> {
   render() {
     return (
       <main>
+        <MessageForm viewer={this.props.viewer} relay={this.props.relay} />
         <MessageList viewer={this.props.viewer} />
       </main>
     );
