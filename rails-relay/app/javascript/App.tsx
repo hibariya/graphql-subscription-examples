@@ -13,16 +13,19 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({ query: operation.text, variables }),
   };
-
-  request.body = JSON.stringify({ query: operation.text, variables });
 
   return fetch('/graphql', request).then(response => response.json());
 }
 
 const Loading = () => <div>Loading...</div>;
 
-export default class extends Component {
+interface AppState {
+  relayEnvironment: any;
+}
+
+export default class extends Component<{}, AppState> {
   constructor(props) {
     super(props);
 

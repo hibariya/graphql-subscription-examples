@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-class MessageItem extends Component {
+interface MessageItemProps {
+  message: any;
+}
+
+class MessageItem extends Component<MessageItemProps, {}> {
   render() {
     return (
       <div>
@@ -11,13 +14,6 @@ class MessageItem extends Component {
     );
   }
 }
-
-MessageItem.propTypes = {
-  message: PropTypes.object.isRequired,
-  relay: PropTypes.shape({
-    environment: PropTypes.object.isRequired,
-  }).isRequired,
-};
 
 export default createFragmentContainer(MessageItem, {
   message: graphql`

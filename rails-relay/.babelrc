@@ -11,7 +11,9 @@
         "useBuiltIns": true
       }
     ],
-    "react"
+    "latest",
+    "stage-0",
+    "react",
   ],
   "plugins": [
     "syntax-dynamic-import",

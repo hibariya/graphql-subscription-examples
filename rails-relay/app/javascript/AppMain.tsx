@@ -4,7 +4,11 @@ import { createFragmentContainer, graphql } from 'react-relay';
 
 import MessageList from './MessageList';
 
-class AppMain extends Component {
+interface AppMainProps {
+  viewer: any;
+}
+
+class AppMain extends Component<AppMainProps, {}> {
   render() {
     return (
       <main>
@@ -13,13 +17,6 @@ class AppMain extends Component {
     );
   }
 }
-
-AppMain.propTypes = {
-  viewer: PropTypes.object.isRequired,
-  relay: PropTypes.shape({
-    environment: PropTypes.object.isRequired,
-  }).isRequired,
-};
 
 export default createFragmentContainer(AppMain, {
   viewer: graphql`

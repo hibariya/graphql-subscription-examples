@@ -4,7 +4,11 @@ import { createFragmentContainer, graphql } from 'react-relay';
 
 import MessageItem from './MessageItem';
 
-class MessageList extends Component {
+interface MessageListProps {
+  viewer: any;
+}
+
+class MessageList extends Component<MessageListProps, {}> {
   renderMessages() {
     return this.props.viewer.messages.edges.map(({ node }) => (
       <MessageItem message={node} key={`message-item-${node.id}`} />
@@ -19,13 +23,6 @@ class MessageList extends Component {
     );
   }
 }
-
-MessageList.propTypes = {
-  viewer: PropTypes.object.isRequired,
-  relay: PropTypes.shape({
-    environment: PropTypes.object.isRequired,
-  }).isRequired,
-};
 
 export default createFragmentContainer(MessageList, {
   viewer: graphql`
