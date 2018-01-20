@@ -20,14 +20,7 @@ function commit(environment, viewer, body, options = {}) {
     {
       mutation,
       variables,
-      configs: [
-        {
-          edgeName: 'newMessageEdge',
-          type: 'RANGE_ADD',
-          parentID: viewer.id,
-          connectionInfo: [{ key: 'App_messages', rangeBehavior: 'prepend' }]
-        },
-      ],
+      updater: () => {}, // NOP here as the created resource is delivered by subscription
       ...options,
     },
   );
