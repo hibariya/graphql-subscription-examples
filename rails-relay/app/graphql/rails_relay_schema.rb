@@ -1,6 +1,9 @@
 RailsRelaySchema = GraphQL::Schema.define do
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+  use GraphQL::Subscriptions::ActionCableSubscriptions
+
+  query Types::QueryType
+  mutation Types::MutationType
+  subscription Types::SubscriptionType
 
   id_from_object ->(object, type_definition, query_ctx) {
     GraphQL::Schema::UniqueWithinType.encode(type_definition.name, object.id)

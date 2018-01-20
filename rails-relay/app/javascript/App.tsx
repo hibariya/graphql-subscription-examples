@@ -3,9 +3,15 @@ import 'babel-polyfill';
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import ActionCable from 'actioncable';
+import createHandler from 'graphql-ruby-client/subscriptions/createHandler';
 
 import './styles/application.sass';
 import AppMain from './AppMain';
+
+const subscriptionHandler = createHandler({
+  cable: ActionCable.createConsumer('/cable'),
+});
 
 function fetchQuery(operation, variables, cacheConfig, uploadables) {
   const request = {
@@ -34,7 +40,7 @@ export default class extends Component<{}, AppState> {
 
   createRelayEnvironment() {
     return new Environment({
-      network: Network.create(fetchQuery),
+      network: Network.create(fetchQuery, subscriptionHandler),
       store: new Store(new RecordSource()),
     });
   }

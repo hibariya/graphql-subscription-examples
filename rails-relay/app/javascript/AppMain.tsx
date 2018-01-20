@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 
+import MessagePostedSubscription from './subscriptions/MessagePostedSubscription';
 import MessageForm from './MessageForm';
 import MessageList from './MessageList';
 
@@ -10,6 +11,12 @@ interface AppMainProps {
 }
 
 class AppMain extends Component<AppMainProps, {}> {
+  componentDidMount() {
+    const { relay, viewer } = this.props;
+
+    MessagePostedSubscription.subscribe(relay.environment, viewer);
+  }
+
   render() {
     return (
       <main>

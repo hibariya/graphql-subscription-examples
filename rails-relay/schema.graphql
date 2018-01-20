@@ -63,6 +63,10 @@ type PostMessageMutationPayload {
   newMessageEdge: MessageEdge
 }
 
+type PostedMessage {
+  newMessageEdge: MessageEdge!
+}
+
 type Query {
   # Fetches an object given its ID.
   node(
@@ -78,6 +82,11 @@ type Query {
 
   # Represents the logged-in user (This may be redundant for Relay Modern)
   viewer: User
+}
+
+type Subscription {
+  # A message was posted
+  messagePosted: PostedMessage!
 }
 
 type User implements Node {

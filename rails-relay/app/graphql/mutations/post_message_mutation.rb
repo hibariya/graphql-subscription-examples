@@ -6,9 +6,14 @@ Mutations::PostMessageMutation = GraphQL::Relay::Mutation.define do
 
   resolve -> (obj, args, ctx) {
     message = Message.create!(body: args[:body], user: ctx[:current_user])
+    message_edge = GraphQL::Relay::Edge.new(
+      message,
+      GraphQL::Relay::RelationConnection.new(nil, {})
+    )
 
-    connection = GraphQL::Relay::RelationConnection.new(nil, {})
-    message_edge = GraphQL::Relay::Edge.new(message, connection)
+    User.all.each do |user|
+      RailsRelaySchema.subscriptions.trigger 'messagePosted', {}, message, scope: user.id
+    end
 
     {newMessageEdge: message_edge}
   }
